@@ -1,0 +1,20 @@
+# Deze applicatie
+Koppelt upload lokale bestanden naar dropbox en koppelt de URL aan producten in Shopify.
+Gaat uit van onze standaard benaming van foto's: Babouche 001.jpg
+    - Update dan ook alleen als:
+    * De merknaam van de verkoper in Shopify aanwezig is in bestandnaam van de foto
+    EN
+    * Het volgnummer van de verkoper in Shopify ook aanwezig is als laatste cijfer van de url (in Shopify). 
+    EN
+    * Het product status "draft" heeft.
+
+
+## Doen bij installatie
+- Admin key var ophalen uit Shopify
+- Dropbox access token aanmaken
+- Directory van bestanden goedzetten (staat nu op /images)
+- Shop env is wat in de globalProductUrl komt te staan
+
+
+### Scopes Shopify 
+write_files, read_files, write_products, read_products, write_product_listings, read_product_listings
