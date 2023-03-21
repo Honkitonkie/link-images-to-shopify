@@ -34,11 +34,11 @@ export function goUpload(imagePath, fileName) {
 }
 
 export function goDelete(fileName) {
-  fs.readFile(path.join(__dirname, "images", fileName), async (err, contents) => {
+  fs.readFile(path.join(__dirname, "..", "images", fileName), async (err, contents) => {
     if (err) {
-      console.log("Error: ", err);
+      console.log("Error @ goDelete: ", err);
     }
-    let del = await deleteFile(fileName);
+    // let del = await deleteFile(fileName);
   });
 }
 

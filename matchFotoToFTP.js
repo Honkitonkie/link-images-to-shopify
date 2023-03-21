@@ -104,6 +104,9 @@ const checkForMatch = function checkForMatch(filename, productUrl) {
         vendor: decapitalize(vendor),
         sku: sku,
       };
+
+
+      console.log("fileObject:",fileObject)
       let matchesVendor = productUrl.includes(fileObject.vendor);
       let productArr = productUrl.split("-");
       let index = productArr.length - 1;

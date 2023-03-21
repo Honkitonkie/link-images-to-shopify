@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const shop = process.env.SHOP;
-const globalProductUrl = `https://${shop}.myshopify.com/admin/api/2022-10/products.json`;
+const globalProductUrl = `https://${shop}.myshopify.com/admin/api/2022-10/products.json?status=draft&limit=250`;
 const config = {
   headers: {
     "X-Shopify-Access-Token": process.env.ADMIN_KEY,
@@ -19,7 +19,7 @@ export function getAllProducts() {
           resolve(_res.data);
         })
         .catch((err) => {
-          console.log("err", err.cause);
+          console.log("err shopify", err.cause);
         });
     } catch (err) {
       console.error("Before post error: " + err.message);
@@ -45,8 +45,8 @@ export function updateVariant(id, image_id) {
           resolve(data);
         })
         .catch((err) => {
-          console.log(err.message);
-          console.log(err.data);
+          console.log("UpdateVariant", err.message);
+          console.log("UpdateVariant", err.data);
           resolve("Error");
         });
     } catch (err) {
@@ -54,26 +54,32 @@ export function updateVariant(id, image_id) {
     }
   });
 }
-export function postImage(id, imageUrl) {
+export function postImage(id, imageUrl, picIsBoven) {
   return new Promise((resolve) => {
     try {
       const specificProductUrl = `https://${shop}.myshopify.com/admin/api/2022-10/products/${id}/images.json`;
+      let check = picIsBoven === true ? 2 : 1;
       const postBody = {
         image: {
           src: imageUrl,
+          position: check,
         },
       };
+      // console.log("check", check, "\nbody: \n", postBody)
       axios
         .post(specificProductUrl, postBody, config)
         .then((_res) => {
-          console.log("Status: ", _res.status);
-          // console.log("Headers: ", _res.data);
+          if(_res.status === 200) {
+            console.log("Upload geslaagd!")
+          } else {
+            console.log("upload status: ", _res.status);
+          }
           resolve(_res.data);
         })
         .catch((err) => {
-          console.log(err.message);
+          console.log("message hier -->", err.message);
           console.log(err.data);
-          // console.log("err", err)
+          console.log(err.headers);
           resolve("Error");
         });
     } catch (err) {
