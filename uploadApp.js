@@ -21,7 +21,7 @@ async function startFlow() {
   let something = [];
   for (let i = 0; i < products?.length; i++) {
     // if (products[i].status === "draft" && !products[i].image) {
-    if (products[i].status === "draft") {
+    if (products[i].status === "draft" && !products[i].image) {
       // console.log("status draft and no image found");
 
       nothing.push("new item");
@@ -30,7 +30,6 @@ async function startFlow() {
       //   // switched to reversed loop because the backside was uploaded first.
         for (let k = files.length -1; k >= 0; k--) {
           let file = files[k];
-
         let fileObject = await checkForMatch(file, products[i].handle);
 
         

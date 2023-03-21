@@ -38,7 +38,7 @@ export function goDelete(fileName) {
     if (err) {
       console.log("Error @ goDelete: ", err);
     }
-    // let del = await deleteFile(fileName);
+    let del = await deleteFile(fileName);
   });
 }
 
